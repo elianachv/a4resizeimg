@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const sharp = require("sharp");
+const axios = require("axios");
 const router = Router();
 const fs = require("fs");
 
@@ -21,10 +22,23 @@ router.get("/", async (req, res) => {
  */
 router.post("/subir", async (req, res) => {
   if (req.error) return res.render("error");
-
   const img = req.file;
-  const response = await cambiar(img.buffer);
+  const response = await procesarImagen(img.buffer);
   res.render("result", { response });
+});
+
+/**
+ * Procesa la imagen proveniente de la url proporcionada por el usuario
+ */
+router.post("/url", async (req, res) => {
+  const imageURL = req.body.url;
+  try {
+    const img = await axios.get(imageURL, { responseType: "arraybuffer" });
+    const response = await procesarImagen(img.data);
+    res.render("result", { response });
+  } catch (error) {
+    res.render("error");
+  }
 });
 
 /**
@@ -32,7 +46,7 @@ router.post("/subir", async (req, res) => {
  * @param {*} buffer
  * @returns la información necesaria para mostrar al usuario
  */
-async function cambiar(buffer) {
+async function procesarImagen(buffer) {
   let imgResized = await sharp(buffer),
     metadata = await imgResized.metadata(),
     response = {
@@ -42,6 +56,7 @@ async function cambiar(buffer) {
       alto_inicial: metadata.height,
       ancho_final: metadata.width,
       alto_final: metadata.height,
+      buffer: buffer,
     };
 
   if (metadata.width > metadata.height && metadata.height < 796) {
@@ -66,6 +81,7 @@ async function cambiar(buffer) {
   let imgFinal = await imgResized.toBuffer(),
     metadataFinal = await sharp(imgFinal).metadata();
 
+  response.buffer = imgFinal;
   response.alto_final = metadataFinal.height;
   response.ancho_final = metadataFinal.width;
   fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
