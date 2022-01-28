@@ -6,8 +6,6 @@ const app = express();
 
 //Configuraciones
 app.set("port", process.env.PORT || 3005);
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
 const multer = require("multer");
 
 //Configuracion de multer

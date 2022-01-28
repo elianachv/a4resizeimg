@@ -7,13 +7,7 @@ const fs = require("fs");
  * Muestra el formulario principal
  */
 router.get("/", async (req, res) => {
-  try {
-    await fs.unlinkSync("src/public/results/img_result.jpg");
-  } catch (err) {
-    console.log("No habia img");
-  } finally {
-    res.render("index");
-  }
+ res.send("¡bienvenido!")
 });
 
 /**
