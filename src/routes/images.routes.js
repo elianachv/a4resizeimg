@@ -1,24 +1,41 @@
 const { Router } = require("express");
 const sharp = require("sharp");
 const router = Router();
-const fs = require("fs");
+const axios = require("axios");
+const { buffer } = require("sharp/lib/is");
 
 /**
  * Muestra el formulario principal
  */
 router.get("/", async (req, res) => {
- res.send("¡bienvenido!")
+  res.send("¡bienvenido!");
 });
 
 /**
  * Procesa la imagen proporcionada por el usuario
  */
 router.post("/subir", async (req, res) => {
-  if (req.error) return res.render("error");
-
+  if (req.error) return res.status(400).json({ error: "Formato incorrecto" });
   const img = req.file;
-  const response = await cambiar(img.buffer);
-  res.render("result", { response });
+  if (!img) return res.status(400).json({ error: "Olvidó archivo" });
+  const response = await procesarImagen(img.buffer);
+  res.json(response);
+});
+
+/**
+ * Procesa la imagen proporcionada por el usuario mediante url
+ */
+router.post("/url", async (req, res) => {
+  const imgUrl = req.body.url;
+  if (!imgUrl) return res.status(400).json({ error: "No proporcionó url" });
+  try {
+    const img = await axios.get(imgUrl, { responseType: "arraybuffer" });
+    const response = await procesarImagen(img.data);
+    if (response.formato !== "jpeg" && response.formato !== "jpg") return res.status(400).json({ error: "Formato inválido" });
+    res.json(response);
+  } catch (error) {
+    res.status(400).json({ error: "La url no apunta a una imagen válida" });
+  }
 });
 
 /**
@@ -26,16 +43,18 @@ router.post("/subir", async (req, res) => {
  * @param {*} buffer
  * @returns la información necesaria para mostrar al usuario
  */
-async function cambiar(buffer) {
+async function procesarImagen(buffer) {
   let imgResized = await sharp(buffer),
     metadata = await imgResized.metadata(),
     response = {
       position: "horizontal",
       configurada: false,
+      formato: metadata.format,
       ancho_inicial: metadata.width,
       alto_inicial: metadata.height,
       ancho_final: metadata.width,
       alto_final: metadata.height,
+      buffer: buffer,
     };
 
   if (metadata.width > metadata.height && metadata.height < 796) {
@@ -62,8 +81,7 @@ async function cambiar(buffer) {
 
   response.alto_final = metadataFinal.height;
   response.ancho_final = metadataFinal.width;
-  fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
-
+  response.buffer = imgFinal;
   return response;
 }
 
