@@ -16,12 +16,12 @@ describe("POST /url", () => {
     expect(response.status).toBe(200);
   });
 
-  test("with a valid url but incorrect format should respond error 'Formato inválido'", async () => {
+  test("with a valid url but incorrect format should respond error 'Formato incorrecto'", async () => {
     const url =
       "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c325.png";
     const response = await request(app).post("/url").send({ url: url });
     expect(response.body).toStrictEqual({
-      error: "Formato inválido",
+      error: "Formato incorrecto",
     });
   });
 
@@ -56,5 +56,26 @@ describe("POST /url", () => {
     expect(response.body).toStrictEqual({
       error: "No proporcionó url",
     });
+  });
+});
+
+describe("POST /subir", () => {
+  test("with a valid image and correct format should respond status 200", async () => {
+    const response = await request(app)
+      .post("/subir")
+      .attach("imagen", "test/img/img-vertical.jpg");
+    expect(response.status).toBe(200);
+  });
+
+  test("with a valid image but wrong format should respond error 'Formato incorrecto'", async () => {
+    const response = await request(app)
+      .post("/subir")
+      .attach("imagen", "test/img/img-png.png");
+      expect(response.body).toStrictEqual({ error: "Formato incorrecto" });
+    });
+
+  test("with no image should respond error 'Olvidó archivo'", async () => {
+    const response = await request(app).post("/subir");
+    expect(response.body).toStrictEqual({ error: "Olvidó archivo" });
   });
 });
