@@ -2,13 +2,12 @@ const { Router } = require("express");
 const sharp = require("sharp");
 const router = Router();
 const axios = require("axios");
-const { buffer } = require("sharp/lib/is");
 
 /**
- * Muestra el formulario principal
+ * Muestra info general sobre el programa
  */
 router.get("/", async (req, res) => {
-  res.send("¡bienvenido!");
+  res.send("¡Bienvenido! Para usar el procesador de imagenes debe acceder a alguna de las url siguientes: \n/subir => para archivos\n /url => para urls");
 });
 
 /**
