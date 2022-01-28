@@ -23,6 +23,7 @@ router.get("/", async (req, res) => {
 router.post("/subir", async (req, res) => {
   if (req.error) return res.render("error");
   const img = req.file;
+  if (!img) return res.render("error");
   const response = await procesarImagen(img.buffer);
   res.render("result", { response });
 });
