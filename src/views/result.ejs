@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+  <h1>Resultado</h1>
+
+  <div style="display: flex;">
+  
+
+      
+
+        <div>
+        <% if(response.position === "horizontal"){ %>
+          <div
+            style="
+              border: crimson 2px solid;
+              width: 1125px;
+              height: 798px;
+              padding: 0;
+              overflow: none;
+            "
+          >
+            <img
+              src="results/img_result.jpg"
+              alt="foto-result"
+              style="margin: 0; padding: 0"
+            />
+          </div>
+      <% } else { %>
+          <div
+          style="border: teal 2px solid; width: 798px; height: 1125px; padding: 0"
+        >
+          <img
+            src="results/img_result.jpg"
+            alt="foto-result"
+            style="margin: 0; padding: 0"
+          />
+        </div>
+      <% } %>
+      </div>
+
+
+      <div style="margin-left: 15px;">
+        <h3>Posición de la hoja: <%- response.position %></h3>
+        <h3>
+          Dimensión inicial: <%- response.ancho_inicial %> X <%- response.alto_inicial %>   </h3>
+        <h3>
+          Dimensión final: <%- response.ancho_final %> X <%- response.alto_final %>
+        </h3>
+    
+        <% if(response.configurada === true){ %>
+            <p>La imagen cambió de tamaño</p>
+        <% } else { %>
+            <p>La imagen no cambió de tamaño</p>
+        <% } %>
+    
+    
+        <a href="results/img_result.jpg" download>Descargar imagen
+  </a>
+  </div>
+
+</div>
+
+   
+
+</body>
+</html>
