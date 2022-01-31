@@ -21,24 +21,33 @@ router.get("/", async (req, res) => {
  * Procesa la imagen proporcionada por el usuario
  */
 router.post("/subir", async (req, res) => {
-  if (req.error) return res.render("error");
+  if (req.error)
+    return res.status(400).render("error", { error: "Formato incorrecto" });
   const img = req.file;
-  if (!img) return res.render("error");
-  const response = await procesarImagen(img.buffer);
+  const hoja = req.body.hoja;
+  if (!img) return res.status(400).render("error", { error: "Olvidó archivo" });
+  const response = await procesarImagen(img.buffer, hoja);
   res.render("result", { response });
 });
 
 /**
- * Procesa la imagen proveniente de la url proporcionada por el usuario
+ * Procesa la imagen proporcionada por el usuario mediante url
  */
 router.post("/url", async (req, res) => {
-  const imageURL = req.body.url;
+  const imgUrl = req.body.url;
+  const hoja = req.body.hoja;
+  if (!imgUrl)
+    return res.status(400).render("error", { error: "No proporcionó url" });
   try {
-    const img = await axios.get(imageURL, { responseType: "arraybuffer" });
-    const response = await procesarImagen(img.data);
+    const img = await axios.get(imgUrl, { responseType: "arraybuffer" });
+    const response = await procesarImagen(img.data, hoja);
+    if (response.formato !== "jpeg" && response.formato !== "jpg")
+      return res.status(400).render("error", { error: "Formato incorrecto" });
     res.render("result", { response });
   } catch (error) {
-    res.render("error");
+    res
+      .status(400)
+      .render("error", { error: "La url no apunta a una imagen válida" });
   }
 });
 
