@@ -7,11 +7,10 @@
 2. [Tecnologías y aplicaciones utilizadas](#tecnologias)
 3. [Estructura del proyecto](#estructura)
 
- * [API](#api)
-   * [Peticiones](#api-peticiones)
-   * [Respuestas](#api-resultados)
+    * [API](#api)
+        * [Peticiones](#api-peticiones)
+        * [Respuestas](#api-resultados)
   
-   
 4. [Despliegue](#despliegue)
 5. [Pruebas](#pruebas)
 6. [Contacto](#contacto)
@@ -112,7 +111,6 @@ El aplicativo puede ser desplegado en cualquier proveedor de servicios en la nub
 * Descargar repositorio en la instancia
 
 
-
 <a id="pruebas"></a>
 ## Pruebas
 
@@ -120,7 +118,7 @@ Para realizar las pruebas de la API se sugiere utilizar las pruebas de integraci
 
 Adicionalmente accediendo a las url /ui encontrará un aplicativo con interfaz gráfica integrada para visualizar los resultados del procesamiento de imagenes.
 
-Este proyecto se encuentra desplegado en Heroku en usando la siguiente ruta [https://api-img-a4.herokuapp.com/ui](https://api-img-a4.herokuapp.com/ui)
+Este proyecto se encuentra desplegado en Heroku puede realizar prueba de la api y de la interfaz usando el siguiente link [https://api-img-a4.herokuapp.com/ui](https://api-img-a4.herokuapp.com/ui)
 
 **Puede continuar interactuando con todos los métodos especificados en el apartado [API](#api) en su máquina local o hacer las pruebas con el servidor en la nube**
 
