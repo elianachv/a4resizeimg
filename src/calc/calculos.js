@@ -31,7 +31,6 @@ const hojas = [
   },
 ];
 
-
 /**
  * Procesa la imagen de ser necesario
  * @param {*} buffer
@@ -54,10 +53,7 @@ async function procesarImagen(buffer, hoja = "A4") {
       buffer: buffer,
     };
 
-  if (
-    metadata.width > metadata.height &&
-    metadata.height < hojaSeleccionada.ancho_px
-  ) {
+  if (metadata.width > metadata.height) {
     //Posicion horizontal
     if (
       metadata.width > hojaSeleccionada.altura_px ||
@@ -101,4 +97,4 @@ async function procesarImagen(buffer, hoja = "A4") {
   return response;
 }
 
-module.exports = { procesarImagen , hojas};
+module.exports = { procesarImagen, hojas };
