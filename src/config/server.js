@@ -6,6 +6,8 @@ const app = express();
 
 //Configuraciones
 app.set("port", process.env.PORT || 3005);
+app.set("views", "src/views");
+app.set("view engine", "ejs");
 const multer = require("multer");
 
 //Configuracion de multer
@@ -23,7 +25,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 const multerConfig = multer({
-  dest: path.join(__dirname, "public/uploads"),
+  dest: "src/public/uploads",
   storage,
   fileFilter,
 }).single("imagen");
@@ -34,7 +36,7 @@ app.use(express.json());
 app.use(multerConfig);
 
 //Contenido estatico
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("src/public"));
 
 //Rutas
 app.use(require("../routes/images.routes"));

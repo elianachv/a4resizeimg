@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Inicio</title>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>Sube tu imagen</h1>
+        <br />
+        <p>
+          Este programa redimensiona una imagen para que se ajuste al tipo de
+          hoja A4, si la imagen tiene un tamaño adecuado no se cambiará el tamaño de la imagen. <br><br>
+          Puedes seleccionar uno de tus archivos o especificar una url. <br><br>
+          Ten en cuenta que solo se admiten imagenes con formato jpg.
+        </p>
+        <br />
+
+        <div class="formularioImg">
+          <div>
+            <h2>Archivo</h2>
+            <form action="/ui/subir" method="post" enctype="multipart/form-data">
+              <input type="file" name="imagen" id="imagen" accept="image/jpg" />
+              <button class="botonDefault">Enviar</button>
+            </form>
+
+            <br />
+            <h2>Url</h2>
+
+            <form action="/ui/url" method="post" enctype="multipart/form-data">
+              <input type="url" name="url" id="url" />
+              <button class="botonDefault">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
