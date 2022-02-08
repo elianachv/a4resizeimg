@@ -54,8 +54,7 @@ async function procesarImagen(buffer, hoja = "A4") {
     };
 
   if (
-    metadata.width > metadata.height &&
-    metadata.height < hojaSeleccionada.ancho_px
+    metadata.width > metadata.height
   ) {
     //Posicion horizontal
     if (
