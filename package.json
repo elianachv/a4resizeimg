@@ -1,12 +1,17 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.7.0",
+    "npm": "8.1.2"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "heroku-postbuild": "ng build --prod"
   },
   "author": "Eliana Chavez Valencia",
   "license": "ISC",
