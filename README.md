@@ -53,8 +53,12 @@ Aplicativo que recibe imágenes en formato JPG de cualquier dimensión (Ancho po
 
 | Método | Url  |  Descripción |   
 |--|--|--|  
+|GET| / |Muestra informacion general de la API|  
 |POST| /subir |Procesa la imagen obtenida desde una url|  
 |POST| /url  |Procesa la imagen obtenida desde un archivo|  
+|GET| /ui |Muestra una vista de inicio para hacer pruebas visuales|  
+|POST| /ui/subir |Procesa la imagen obtenida desde un archivo y muestra el resultado del procesamiento|  
+|POST| /ui/url |Procesa la imagen obtenida desde una url y muestra el resultado del procesamiento|  
 
 <a id="api-resultados"></a>  
 **Resultados**
@@ -108,7 +112,7 @@ Estrategias de despliegue
 
 Para realizar las pruebas de la API se sugiere utilizar las pruebas de integración desarrolladas ejecutando el comando *npm run test* puede personalizarlas agregando sus propias imagenes en la carpeta img del directorio test y configurandolas en los metodos de test.
 
-Adicionalmente en la rama vista del repositorio encontrará un aplicativo con interfaz gráfica integrada para visualizar los resultados del procesamiento de imagenes.
+Adicionalmente accediendo a las url /ui encontrará un aplicativo con interfaz gráfica integrada para visualizar los resultados del procesamiento de imagenes.
 
 
 **Puede continuar interactuando con todos los métodos especificados en el apartado [API](#api) en su máquina local o hacer las pruebas con el servidor en la nube****
