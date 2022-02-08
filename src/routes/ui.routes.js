@@ -3,15 +3,21 @@ const { procesarImagen } = require("../calc/calculos");
 const axios = require("axios");
 const router = Router();
 const fs = require("fs");
-
+const path = require("path");
 /**
  * Muestra el formulario principal
  */
 router.get("/ui", async (req, res) => {
   try {
-    await fs.unlinkSync("src/public/results/img_result.jpg");
+
+    if (fs.existsSync("src/public/results/img_result.jpg")) {
+      await fs.unlinkSync("src/public/results/img_result.jpg");
+      console.log("Img borrada");
+    } else {
+      console.log("No habia img");
+    }
   } catch (err) {
-    console.log("No habia img");
+    console.log("Error al eliminar img ", err);
   } finally {
     res.render("index");
   }
@@ -21,7 +27,8 @@ router.get("/ui", async (req, res) => {
  * Procesa la imagen proporcionada por el usuario
  */
 router.post("/ui/subir", async (req, res) => {
-  if (req.error) return res.status(400).render("error", { error: "Formato incorrecto" });
+  if (req.error)
+    return res.status(400).render("error", { error: "Formato incorrecto" });
   const img = req.file;
   const hoja = req.body.hoja;
   if (!img) return res.status(400).render("error", { error: "Olvidó archivo" });
@@ -39,7 +46,7 @@ router.post("/ui/url", async (req, res) => {
     return res.status(400).render("error", { error: "No proporcionó url" });
   try {
     const img = await axios.get(imgUrl, { responseType: "arraybuffer" });
-    const response = await procesarImagen(img.data, hoja,true);
+    const response = await procesarImagen(img.data, hoja, true);
     if (response.formato !== "jpeg" && response.formato !== "jpg")
       return res.status(400).render("error", { error: "Formato incorrecto" });
     res.render("result", { response });

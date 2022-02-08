@@ -31,7 +31,6 @@ const hojas = [
   },
 ];
 
-
 /**
  * Procesa la imagen de ser necesario
  * @param {*} buffer
@@ -54,9 +53,7 @@ async function procesarImagen(buffer, hoja = "A4", ui) {
       buffer: buffer,
     };
 
-  if (
-    metadata.width > metadata.height
-  ) {
+  if (metadata.width > metadata.height) {
     //Posicion horizontal
     if (
       metadata.width > hojaSeleccionada.altura_px ||
@@ -96,12 +93,24 @@ async function procesarImagen(buffer, hoja = "A4", ui) {
   response.ancho_final = metadataFinal.width;
   response.buffer = imgFinal;
 
-  if(ui){
-    console.log("SE GUARDA LA IMAGEN")
-    fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
+  if (ui) {
+    console.log("SE GUARDA LA IMAGEN");
+    try {
+      console.log(
+        "¿Carpeta destino existe? ",
+        fs.existsSync("src/public/results/")
+      );
+      await fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
+      console.log(
+        "¿Foto creada con exito? ",
+        fs.existsSync("src/public/results/img_result.jpg")
+      );
+    } catch (error) {
+      console.log("ERROR AL GUARDAR IMG", error);
+    }
   }
 
   return response;
 }
 
-module.exports = { procesarImagen , hojas};
+module.exports = { procesarImagen, hojas };
