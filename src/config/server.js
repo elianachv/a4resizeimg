@@ -38,5 +38,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Rutas
 app.use(require("../routes/images.routes"));
+app.use(require("../routes/ui.routes"));
 
 module.exports = app;
