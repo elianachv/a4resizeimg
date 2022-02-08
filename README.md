@@ -105,7 +105,12 @@ Para levantar la aplicación
 ### En la nube
 Estrategias de despliegue
 
-1. 
+El aplicativo puede ser desplegado en cualquier proveedor de servicios en la nube teniendo en cuenta los siguientes requerimientos
+
+* Instacia o servidor levantado y con conexion SSH 
+* Configuración del entorno instalando las dependencias requeridas en este caso node js y el administrador de servicio de preferencia como nginx
+* Descargar repositorio en la instancia
+
 
 <a id="pruebas"></a>
 ## Pruebas
