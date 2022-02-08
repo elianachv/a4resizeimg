@@ -98,7 +98,7 @@ async function procesarImagen(buffer, hoja = "A4", ui) {
 
   if(ui){
     console.log("SE GUARDA LA IMAGEN")
-    fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
+    fs.writeFileSync("/results/img_result.jpg", imgFinal);
   }
 
   return response;
