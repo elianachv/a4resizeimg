@@ -108,8 +108,9 @@ Estrategias de despliegue
 El aplicativo puede ser desplegado en cualquier proveedor de servicios en la nube teniendo en cuenta los siguientes requerimientos
 
 * Instacia o servidor levantado y con conexion SSH 
-* Configuración del entorno instalando las dependencias requeridas en este caso node js y el administrador de servicio de preferencia como nginx
+* Configuración del entorno instalando las dependencias requeridas en este caso node js
 * Descargar repositorio en la instancia
+
 
 
 <a id="pruebas"></a>
@@ -119,8 +120,9 @@ Para realizar las pruebas de la API se sugiere utilizar las pruebas de integraci
 
 Adicionalmente accediendo a las url /ui encontrará un aplicativo con interfaz gráfica integrada para visualizar los resultados del procesamiento de imagenes.
 
+Este proyecto se encuentra desplegado en Heroku en usando la siguiente ruta [https://api-img-a4.herokuapp.com/ui](https://api-img-a4.herokuapp.com/ui)
 
-**Puede continuar interactuando con todos los métodos especificados en el apartado [API](#api) en su máquina local o hacer las pruebas con el servidor en la nube****
+**Puede continuar interactuando con todos los métodos especificados en el apartado [API](#api) en su máquina local o hacer las pruebas con el servidor en la nube**
 
 ****Sujeto a disponibilidad del servicio**
 
