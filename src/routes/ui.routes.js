@@ -9,7 +9,10 @@ const fs = require("fs");
  */
 router.get("/ui", async (req, res) => {
   try {
-    await fs.unlinkSync("src/public/results/img_result.jpg");
+    await fs.accessSync("/results/.gitKeep");
+    console.log("oki git");
+    await fs.unlinkSync("/results/img_result.jpg");
+    console.log("img borrada");
   } catch (err) {
     console.log("No habia img");
   } finally {
