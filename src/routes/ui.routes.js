@@ -21,8 +21,7 @@ router.get("/ui", async (req, res) => {
  * Procesa la imagen proporcionada por el usuario
  */
 router.post("/ui/subir", async (req, res) => {
-  if (req.error)
-    return res.status(400).render("error", { error: "Formato incorrecto" });
+  if (req.error) return res.status(400).render("error", { error: "Formato incorrecto" });
   const img = req.file;
   const hoja = req.body.hoja;
   if (!img) return res.status(400).render("error", { error: "Olvidó archivo" });

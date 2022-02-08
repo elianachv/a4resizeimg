@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 //Configuraciones
-app.set("port", process.env.PORT || 3005);
+app.set("port", process.env.PORT || 3007);
 app.set("views", "src/views");
 app.set("view engine", "ejs");
 const multer = require("multer");
