@@ -1,4 +1,5 @@
 const sharp = require("sharp");
+const fs = require("fs");
 
 const hojas = [
   {
@@ -36,7 +37,7 @@ const hojas = [
  * @param {*} buffer
  * @returns la información necesaria para mostrar al usuario
  */
-async function procesarImagen(buffer, hoja = "A4") {
+async function procesarImagen(buffer, hoja = "A4", ui) {
   const hojaSeleccionada = hojas.find((h) => h.codigo === hoja);
 
   let imgResized = await sharp(buffer),
@@ -94,6 +95,12 @@ async function procesarImagen(buffer, hoja = "A4") {
   response.alto_final = metadataFinal.height;
   response.ancho_final = metadataFinal.width;
   response.buffer = imgFinal;
+
+  if(ui){
+    console.log("SE GUARDA LA IMAGEN")
+    fs.writeFileSync("src/public/results/img_result.jpg", imgFinal);
+  }
+
   return response;
 }
 

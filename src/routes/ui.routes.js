@@ -25,7 +25,7 @@ router.post("/ui/subir", async (req, res) => {
   const img = req.file;
   const hoja = req.body.hoja;
   if (!img) return res.status(400).render("error", { error: "Olvidó archivo" });
-  const response = await procesarImagen(img.buffer, hoja);
+  const response = await procesarImagen(img.buffer, hoja, true);
   res.render("result", { response });
 });
 
@@ -39,7 +39,7 @@ router.post("/ui/url", async (req, res) => {
     return res.status(400).render("error", { error: "No proporcionó url" });
   try {
     const img = await axios.get(imgUrl, { responseType: "arraybuffer" });
-    const response = await procesarImagen(img.data, hoja);
+    const response = await procesarImagen(img.data, hoja,true);
     if (response.formato !== "jpeg" && response.formato !== "jpg")
       return res.status(400).render("error", { error: "Formato incorrecto" });
     res.render("result", { response });
